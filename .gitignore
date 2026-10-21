@@ -1,0 +1,19 @@
+# Secretos y configuración local
+.env
+.env.*
+!.env.example
+*credenciales*.txt
+*.pem
+*.key
+# Entornos y datos de ejecución
+.venv/
+__pycache__/
+*.pyc
+*.sqlite3
+*.log
+node_modules/
+# Evidencia sin anonimizar (no versionar)
+privado/
+evidencias-sin-depurar/
+.DS_Store
+Thumbs.db
