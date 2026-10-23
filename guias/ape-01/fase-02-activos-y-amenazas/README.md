@@ -1,14 +1,14 @@
-# Fase 2 — Activos y amenazas
+# Fase 2 — Tríada CIA, activos y amenazas
 
-Período: 05–09 de octubre de 2026.
+**Avance al integrar el documento completo, 23/10/2026:** Matriz y controles documentados; implementación y revisión entre pares no acreditadas.
 
-Estado: pendiente de completar.
+Fuente: [Reporte de los integrantes](../../../entregas/APE-01-reporte-publicacion.pdf), páginas físicas 6–9. El contenido fue organizado a partir del reporte; no implica nuevas pruebas ni fechas de ejecución reconstruidas.
 
-## Entregables
+## Contenido de esta fase
 
-- [ ] [matriz-activos-amenazas.md](matriz-activos-amenazas.md)
-- [ ] [controles-mitigacion.md](controles-mitigacion.md)
-- [ ] [revision-entre-pares.md](revision-entre-pares.md)
-- [ ] [informe-fase.md](informe-fase.md)
+- [12 activos con valoración CIA](matriz-activos-amenazas.md).
+- [Dos controles propuestos por activo](controles-mitigacion.md).
+- [Síntesis de la fase](informe-fase.md).
+- [Registro de revisión entre pares pendiente](revision-entre-pares.md).
 
-- [ ] Capturas y registros en [evidencias/](evidencias/README.md).
+[Volver al avance de APE 01](../README.md)

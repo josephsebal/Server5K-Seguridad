@@ -1,27 +1,19 @@
-# Informe de fase
+# Informe de fase 2 — activos y amenazas
 
-Estado: pendiente.
+Fuente: [Reporte de los integrantes](../../../entregas/APE-01-reporte-publicacion.pdf), páginas físicas 6–9.
 
-## Identificación
+## Avance incorporado
 
-Autores, fecha, versión del código y entorno: pendiente.
+Se identificaron 12 activos: credenciales; tokens; datos personales; asignación juez-equipo; competencias; tiempos; resultados públicos; WebSocket; base de datos; logs; secretos y dependencias. Se clasificaron en C/I/D y se asociaron amenazas y dos controles propuestos por activo.
 
-## Objetivo y alcance
+## Criterio de priorización
 
-Pendiente.
+Se destaca la integridad de los tiempos y resultados porque determina la clasificación de la carrera. Credenciales y tokens requieren confidencialidad, y la disponibilidad de los servicios importa especialmente durante el evento.
 
-## Método y actividades ejecutadas
+## Entregables
 
-Pendiente. Distinguir actividades ejecutadas, no ejecutadas y no aplicables.
+- [Matriz de activos y amenazas](matriz-activos-amenazas.md).
+- [Controles de mitigación](controles-mitigacion.md).
+- [Revisión entre pares](revision-entre-pares.md): el documento no aporta registro individualizado; permanece pendiente.
 
-## Resultados y evidencias
-
-Pendiente. Referenciar los registros de la fase y sus IDs; no presentar hipótesis como hallazgos.
-
-## Limitaciones
-
-Pendiente.
-
-## Conclusiones y siguientes acciones
-
-Pendiente.
+La tabla es una evaluación de activos, no evidencia de que las amenazas se hayan materializado. Los controles propuestos no se marcan como implementados.
