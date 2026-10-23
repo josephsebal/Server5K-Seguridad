@@ -1,32 +1,35 @@
-# Ficha del proyecto
+# Ficha del proyecto — avance de fase 1
 
-Estado: primera versión basada en revisión del código; completar datos académicos y confirmar ejecución actual.
+Fuente: [Reporte de los integrantes](../../../entregas/APE-01-reporte-publicacion.pdf), páginas físicas 1–3. Adaptación a Markdown del documento entregado, con una precisión sobre las versiones verificadas.
 
-| Campo | Valor |
+| Campo | Descripción |
 | --- | --- |
-| Nombre | Server5K |
-| Función | Gestión de competencias 5K, equipos, jueces y registros de tiempo con actualizaciones en tiempo real |
-| Integrantes | Pendiente |
-| Asignatura / ciclo | Software Security / 8A |
-| Docente | Valeria Herrera Salazar |
-| Código | https://github.com/DarwinG23/Server5K |
-| Commit local de referencia | `826aec5c04dfc5d3f8be77e9abde2d13f69a51e8` |
-| Entorno objetivo propuesto | Instalación local de laboratorio |
+| Aplicación | Server5K — Sistema de competencias 5K |
+| Función | Gestionar competencias, jueces, equipos y registros de tiempo en milisegundos, con actualización en tiempo real. |
+| Integrantes | Darwin Enrique Granda Orosco; Darwin Andrés Sarango Soto; Joseph Sebastian Balcazar Loaiza. |
+| Asignatura / ciclo / unidad | Software Security / 8A / Unidad 1. |
+| Docente | Valeria Herrera Salazar. |
+| Período de la práctica | 28 de septiembre al 23 de octubre de 2026. |
+| Usuarios | Jueces autenticados, administrador y visitantes de la vista pública. |
+| Backend | Django, Django REST Framework y Daphne/ASGI. El reporte declara Django 6.0; la revisión técnica local utilizó Django 5.2.8. |
+| Tiempo real | Django Channels, WebSocket y Redis. |
+| Persistencia | PostgreSQL 16 en el despliegue documentado; SQLite como alternativa local y base temporal de las pruebas aisladas. |
+| Autenticación | JWT con SimpleJWT y modelo propio Juez. |
+| Documentación | Swagger `/api/docs/` y ReDoc `/api/redoc/`. |
+| Despliegue documentado | Docker Compose: web, PostgreSQL y Redis. |
+| Código de la aplicación | https://github.com/DarwinG23/Server5K |
+| Portafolio | https://github.com/josephsebal/Server5K-Seguridad |
 
-## Usuarios y roles identificados
+## Roles
 
-- Administrador: gestión mediante Django Admin; permisos efectivos pendientes de comprobar.
-- Juez: autenticación y gestión de registros de equipos; restricciones pendientes de comprobar.
-- Visitante: consulta de vistas públicas de competencias y resultados.
+- Juez: consulta sus equipos y registra tiempos.
+- Administrador: gestiona la aplicación desde Django Admin.
+- Visitante: consulta competencias y resultados públicos.
 
-## Tecnologías declaradas
+## Selección de la aplicación
 
-Python >=3.13; Django; Django REST Framework; SimpleJWT; Channels y Daphne; PostgreSQL; Redis; WhiteNoise; drf-spectacular. Fuente: `pyproject.toml`, configuraciones y rutas del código objetivo. Registrar versiones efectivamente instaladas en `entorno.md`.
+El documento identifica código disponible, autenticación y base de datos, y aporta capturas de servicios, interfaz y Swagger. Son evidencias proporcionadas por los integrantes; no describen una nueva ejecución realizada al preparar este avance. Las pruebas del portafolio deben mantenerse dentro del entorno propio o de laboratorio.
 
-## Requisitos mínimos
+![Repositorio de Server5K, figura 1 del documento](evidencias/fig-01-repositorio.png)
 
-- [x] Código fuente disponible.
-- [x] Autenticación implementada en el código.
-- [x] Configuración de base de datos disponible.
-- [ ] Ejecución local comprobada y evidencia actual adjunta.
-- [ ] Cuentas de prueba de administrador y usuario común creadas y verificadas.
+[Alcance](alcance.md) · [Inventario de 16 elementos](inventario-superficie.md) · [Entorno y capturas](entorno.md)

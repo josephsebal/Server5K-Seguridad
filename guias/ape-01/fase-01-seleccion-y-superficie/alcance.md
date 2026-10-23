@@ -1,25 +1,15 @@
 # Alcance de la auditoría
 
-Estado: propuesta pendiente de validar por los integrantes.
+Fuente: [Reporte de los integrantes](../../../entregas/APE-01-reporte-publicacion.pdf), página física 5.
 
-## Dentro del alcance propuesto
+## Dentro del alcance
 
-- Backend Server5K, autenticación, sesiones/tokens, competencias, equipos y registros de tiempo.
-- Panel de administración, vistas públicas, API REST, documentación y WebSocket.
-- Configuración de errores, permisos, validación de entradas y componentes del entorno local.
-- Datos sintéticos de competencias, jueces, equipos y tiempos.
+Autenticación y sesiones JWT; Django Admin; API REST; control de acceso por juez y equipo; registro de tiempos; WebSocket; vistas públicas; configuración de seguridad; errores; cabeceras HTTP; CORS/CSRF; secretos y dependencias.
 
-## Fuera del alcance propuesto
+## Fuera del alcance
 
-Infraestructura de terceros, servicios de producción y datos reales. La aplicación móvil no se incluye por defecto; cualquier ampliación deberá registrarse aquí.
+Infraestructura del proveedor de hosting, dispositivos físicos de cronometraje, disponibilidad real de Internet, seguridad física y datos reales de competidores.
 
-## Límites del entorno
+## Condiciones del laboratorio
 
-- URL y puertos autorizados: pendiente.
-- Responsable y autorización del laboratorio: pendiente.
-- Ventana de pruebas: pendiente.
-- Copia de respaldo y recuperación: pendiente.
-
-## Criterios de cierre
-
-Entregables de las cuatro fases completos, evidencias trazables y tres hallazgos priorizados justificados; registrar limitaciones y pruebas no ejecutadas.
+Las comprobaciones técnicas publicadas usan cuentas ficticias y una base temporal. Las imágenes de servicios aportadas en el documento corresponden al entorno de los autores. La aplicación móvil y un despliegue público no se evaluaron. La presencia de una ruta en el inventario no prueba por sí sola una vulnerabilidad ni su disponibilidad en producción.

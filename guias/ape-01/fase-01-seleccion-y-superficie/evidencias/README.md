@@ -1,7 +1,10 @@
 # Evidencias de fase 1
 
-Guardar capturas, solicitudes/respuestas anonimizadas y registros de ejecución.
-Nomenclatura: `EVI-F1-001-descripcion.ext`.
-Usar [la plantilla del registro](../../../../plantillas/registro-evidencias.md) para documentar fecha, responsable, entorno, pasos, resultado e IDs relacionados.
+Figuras extraídas del documento aportado por los integrantes, páginas físicas 3–5:
 
-Estado: sin evidencias de auditoría adjuntas. Este README no cuenta como evidencia.
+- [Figura 1: repositorio de la aplicación](fig-01-repositorio.png).
+- [Figura 2: servicios y registros de Docker Compose](fig-02-servicios-docker.png).
+- [Figura 3: interfaz pública](fig-03-vista-publica.png).
+- [Figura 4: documentación de la API](fig-04-swagger.png).
+
+Estas capturas no fueron generadas al integrar el reporte: documentan el avance aportado por los autores. El inventario contiene 16 elementos, pero todavía no una captura específica por cada ruta y rol.
