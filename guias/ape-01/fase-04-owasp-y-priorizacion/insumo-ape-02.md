@@ -1,9 +1,9 @@
 # Insumo para APE 02
 
-Estado: plantilla. La guía menciona criptografía, control de acceso e inyecciones como ejes de auditoría técnica; no incluye las fases ni la rúbrica de APE 02.
+| Eje | Hallazgos / controles | Siguiente verificación |
+| --- | --- | --- |
+| Criptografía | HAL-008; PBKDF2 con sal observado | Exigir secreto al arranque, revisar rotación JWT y TLS del despliegue; no usar el valor real en evidencias |
+| Control de acceso | HAL-001; HAL-006; WS rechaza ID de juez ajeno | Permisos por objeto, competencias distintas y matriz de roles; verificar privacidad de resultados |
+| Inyecciones | P15 y P16 sin SQLi/XSS demostrado; HAL-009 con avisos | Ampliar revisión de entradas y salidas; analizar alcance real de CVEs sin extrapolar a todos los usos ORM |
 
-| Eje | Hallazgos relacionados | Evidencias | Hipótesis por verificar | Próxima prueba y alcance | Responsable |
-| --- | --- | --- | --- | --- | --- |
-| Criptografía | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |
-| Control de acceso | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |
-| Inyecciones | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |
+Evidencias y condiciones: [informe](hallazgos-server5k.md). Las demás fases de APE 02 deben definirse con su guía oficial.

@@ -1,0 +1,481 @@
+{
+  "executed_at_utc": "2026-10-21T13:28:36.537094+00:00",
+  "django": "5.2.8",
+  "database": "SQLite temporal independiente (no PostgreSQL de la aplicación)",
+  "channels": "InMemoryChannelLayer (no Redis real)",
+  "code_root": "/home/joseph/Documentos/Servidor5KAuditar/Server5K",
+  "results": [
+    {
+      "id": "P01-IDOR",
+      "request": "GET /api/equipos/2/registros/estado/",
+      "actor": "juez A, equipo asignado a juez B",
+      "status": 200,
+      "response": {
+        "equipo_id": 2,
+        "equipo_nombre": "Equipo B",
+        "total_registros": 1,
+        "maximo_registros": 15,
+        "puede_enviar": false,
+        "registros": [
+          {
+            "id_registro": "4197acbf-9817-4732-93b0-b389badeff6e",
+            "tiempo": 222000,
+            "horas": 0,
+            "minutos": 3,
+            "segundos": 42,
+            "milisegundos": 0
+          }
+        ]
+      },
+      "control_detail_status": 404
+    },
+    {
+      "id": "P02-ANON",
+      "status": 401
+    },
+    {
+      "id": "P03-LOGIN",
+      "failed_statuses": [
+        401,
+        401,
+        401,
+        401,
+        401,
+        401
+      ],
+      "successful_after": 200,
+      "throttle_classes": [],
+      "captured_log": "Unauthorized: /api/login/\nUnauthorized: /api/login/\nUnauthorized: /api/login/\nUnauthorized: /api/login/\nUnauthorized: /api/login/\nUnauthorized: /api/login/\n",
+      "note": "No se observó bloqueo en 6 intentos; no prueba la ausencia de un proxy externo."
+    },
+    {
+      "id": "P04-WEAK-PASSWORD",
+      "form_valid": true,
+      "form_errors": {},
+      "algorithm": "pbkdf2_sha256",
+      "password_validators_configured": 4
+    },
+    {
+      "id": "P05-NEGATIVE",
+      "status": 201,
+      "stored": [
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000,
+        -1000
+      ],
+      "response": {
+        "exito": true,
+        "mensaje": "Registros guardados exitosamente",
+        "equipo_id": 3,
+        "equipo_nombre": "Negativos",
+        "equipo_dorsal": 3,
+        "total_guardados": 15,
+        "registros": [
+          {
+            "indice": 0,
+            "id_registro": "f642d062-7f06-44aa-a8f4-0a6e08f5b075",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 1,
+            "id_registro": "a98bd537-f0ba-4afe-a5ab-d7da8e045a67",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 2,
+            "id_registro": "a6baebec-565f-48b1-b07b-b99f7bbee823",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 3,
+            "id_registro": "f2cfec7d-144a-4b6e-8031-cba950fe411c",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 4,
+            "id_registro": "b68d17df-ecaf-4666-854e-a59ef733f561",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 5,
+            "id_registro": "781a0f91-27d0-4519-afc8-388ca0eb7f03",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 6,
+            "id_registro": "ed1a7059-ac28-47a8-b209-a6f0473972b2",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 7,
+            "id_registro": "254471a3-9884-433b-9b1e-9d5c9631ead8",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 8,
+            "id_registro": "2af13e89-b3b9-40c7-8c4b-a76b15dca1c7",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 9,
+            "id_registro": "542851c2-3a94-455f-9283-fdd32bc264c2",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 10,
+            "id_registro": "0ef15f96-b2c5-4be3-9e18-ed8a48a63a09",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 11,
+            "id_registro": "ef00666d-508c-4258-842e-7f992edbbabc",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 12,
+            "id_registro": "32c24338-bcbb-4c5e-b4ee-4916226b36d5",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 13,
+            "id_registro": "1043bdab-744e-4d35-bb56-2813370aefe3",
+            "tiempo": -1000,
+            "duplicado": false
+          },
+          {
+            "indice": 14,
+            "id_registro": "cc04fbc7-f4ec-4039-bf72-066fb3795b5f",
+            "tiempo": -1000,
+            "duplicado": false
+          }
+        ],
+        "registros_fallidos": []
+      }
+    },
+    {
+      "id": "P06-PARTIAL",
+      "status": 201,
+      "count": 1,
+      "response": {
+        "exito": true,
+        "mensaje": "Registros guardados exitosamente",
+        "equipo_id": 4,
+        "equipo_nombre": "Parcial",
+        "equipo_dorsal": 4,
+        "total_guardados": 1,
+        "registros": [
+          {
+            "indice": 0,
+            "id_registro": "5189cb9b-49f0-4161-80b7-1e370fe83131",
+            "tiempo": 1000,
+            "duplicado": false
+          }
+        ],
+        "registros_fallidos": [
+          {
+            "indice": 1,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 2,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 3,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 4,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 5,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 6,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 7,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 8,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 9,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 10,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 11,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 12,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 13,
+            "error": "Falta el campo tiempo"
+          },
+          {
+            "indice": 14,
+            "error": "Falta el campo tiempo"
+          }
+        ]
+      },
+      "retry_status": 400,
+      "retry_response": {
+        "exito": false,
+        "error": [
+          {
+            "indice": 0,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 1,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 2,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 3,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 4,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 5,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 6,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 7,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 8,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 9,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 10,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 11,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 12,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 13,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          },
+          {
+            "indice": 14,
+            "error": "El equipo ya tiene 1 registros guardados. No se permiten envíos adicionales."
+          }
+        ]
+      }
+    },
+    {
+      "id": "P07-CLOSED-COMPETITION",
+      "target_is_running": false,
+      "other_assigned_competition_running": true,
+      "status": 201,
+      "stored_count": 15
+    },
+    {
+      "id": "P08-LOGIN-EMPTY",
+      "status": 400,
+      "response": {
+        "error": "Se requiere username y password."
+      }
+    },
+    {
+      "id": "P09-LOGIN-LIST",
+      "status": 500,
+      "response": {
+        "html": true,
+        "bytes": 145
+      }
+    },
+    {
+      "id": "P10-BATCH-TYPE",
+      "status": 500,
+      "response": {
+        "html": true,
+        "bytes": 145
+      }
+    },
+    {
+      "id": "P11-BATCH-ITEMS",
+      "status": 400,
+      "response": {
+        "exito": false,
+        "error": [
+          {
+            "indice": 0,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 1,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 2,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 3,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 4,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 5,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 6,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 7,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 8,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 9,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 10,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 11,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 12,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 13,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          },
+          {
+            "indice": 14,
+            "error": "Error general: 'str' object has no attribute 'get'"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P12-REFRESH-TYPE",
+      "status": 400,
+      "response": {
+        "refresh": [
+          "No es una cadena válida."
+        ]
+      }
+    },
+    {
+      "id": "P13-DEBUG",
+      "status": 500,
+      "contains_traceback": true,
+      "contains_project_path": true,
+      "contains_attribute_error": true,
+      "html_not_saved": true
+    },
+    {
+      "id": "P14-NOTFOUND",
+      "status": 404,
+      "headers": {
+        "X-Frame-Options": "DENY",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "same-origin"
+      }
+    },
+    {
+      "id": "P15-SQLI",
+      "status": 401,
+      "response": {
+        "error": "Credenciales inválidas."
+      },
+      "note": "Una entrada de prueba; no equivale a una auditoría exhaustiva de inyecciones."
+    },
+    {
+      "id": "P16-XSS-ESCAPE",
+      "status": 200,
+      "raw_marker_present": false,
+      "escaped_marker_present": true
+    },
+    {
+      "id": "P17-DEFAULT-SIGNING",
+      "scenario": "Sólo cuando falta SECRET_KEY y se utiliza el fallback público del código",
+      "status": 200,
+      "affects_current_env_not_tested": true
+    },
+    {
+      "id": "P18-WS-NO-TOKEN",
+      "connected": false,
+      "close_code": 4001
+    },
+    {
+      "id": "P19-WS-OTHER-JUDGE",
+      "connected": false,
+      "close_code": 4003
+    }
+  ]
+}
