@@ -1,44 +1,50 @@
-# Server5K — Portafolio de seguridad
+# Server5K — Portafolio de Software Security
 
-Repositorio de evidencias de Software Security, ciclo 8A, período 2026.
-Aplicación objetivo: [Server5K](https://github.com/DarwinG23/Server5K).
+**APE 01: Análisis y superficie de ataque del proyecto.** Universidad Nacional de Loja · Computación · Ciclo 8A · Unidad 1.
 
-## Estado
+**Integrantes:** Darwin Enrique Granda Orosco · Darwin Andrés Sarango Soto · Joseph Sebastian Balcazar Loaiza.
+**Docente:** Valeria Herrera Salazar.
+**Período académico:** 28 de septiembre al 23 de octubre de 2026.
 
-Estructura y plantillas creadas. La ficha contiene información identificada en el código. Los inventarios, matrices, pruebas y conclusiones están **pendientes de completar y validar**; no constituyen resultados de una auditoría realizada.
+Aplicación auditada: [DarwinG23/Server5K](https://github.com/DarwinG23/Server5K). Este repositorio reúne el reporte, avances y evidencias de seguridad.
 
-## Organización
+## Avance por fase
 
-```text
-.
-├── guias/
-│   ├── ape-01/
-│   │   ├── fase-01-seleccion-y-superficie/
-│   │   ├── fase-02-activos-y-amenazas/
-│   │   ├── fase-03-gestion-de-errores/
-│   │   ├── fase-04-owasp-y-priorizacion/
-│   │   ├── informe-consolidado.md
-│   │   └── preguntas-de-control.md
-│   ├── ape-02/
-│   ├── ape-03/
-│   └── ape-04/
-├── referencias/
-└── plantillas/
+| Fase | Qué se incorporó del documento | Acceso |
+| --- | --- | --- |
+| **1. Selección y superficie** | Ficha del proyecto, alcance, inventario de 16 elementos y cuatro figuras. | [Ver fase 1](guias/ape-01/fase-01-seleccion-y-superficie/README.md) |
+| **2. Activos y amenazas** | Matriz CIA de 12 activos, amenazas y dos controles propuestos por activo. | [Ver fase 2](guias/ape-01/fase-02-activos-y-amenazas/README.md) |
+| **3. Gestión de errores** | Casos ejecutados, fugas observadas, registro de errores y propuestas de corrección. | [Ver fase 3](guias/ape-01/fase-03-gestion-de-errores/README.md) |
+| **4. OWASP y priorización** | Diez categorías, matriz de riesgos, tres hallazgos seleccionados y capturas. | [Ver fase 4](guias/ape-01/fase-04-owasp-y-priorizacion/README.md) |
+
+El documento se integró el **23/10/2026**. “Documentado” no equivale a “corregido”: se señalan pruebas no ejecutadas, límites del laboratorio, revisión entre pares pendiente y controles aún propuestos. No se reconstruyen fechas de ejecución ni commits de semanas anteriores.
+
+## Documento y resultados principales
+
+- [Reporte completo, copia preparada para publicación](entregas/APE-01-reporte-publicacion.pdf).
+- [Procedencia del reporte y notas de publicación](entregas/README.md).
+- [Informe consolidado](guias/ape-01/informe-consolidado.md).
+- [Matriz de priorización y tres hallazgos de la entrega](guias/ape-01/fase-04-owasp-y-priorizacion/matriz-priorizacion-para-reporte.md).
+- [Preguntas y respuestas del documento](guias/ape-01/preguntas-del-documento.md).
+- [Hallazgos por categoría, rutas y archivos](guias/ape-01/fase-04-owasp-y-priorizacion/registro-detallado-por-categoria.md).
+- [Capturas A06, A08 y A09 y explicaciones sencillas](guias/ape-01/fase-04-owasp-y-priorizacion/HALLAZGOS-RESUMIDOS-A06-A08-A09.md).
+
+## Cómo repetir las pruebas
+
+```bash
+./probar-owasp.sh
+# Mostrar sólo la explicación de una categoría (se ejecutan las 19 comprobaciones):
+./probar-owasp.sh A01
 ```
 
-- [Guía APE 01 y lista de entrega](guias/ape-01/README.md)
-- [Ficha del proyecto](guias/ape-01/fase-01-seleccion-y-superficie/ficha-proyecto.md)
-- [Registro de evidencias](plantillas/registro-evidencias.md)
-- [Guía original](referencias/guia-ape-01.pdf)
+Requiere el repositorio Server5K y sus dependencias en `../Server5K/.venv`; se puede indicar otra ruta con `SERVER5K_DIR`. Las pruebas crean cuentas, equipos y una base SQLite temporal, sin utilizar la base real. A03 no vuelve a consultar avisos CVE; A08 realiza revisión de configuración.
 
-El PDF exige organización por guía y fase, pero no prescribe nombres exactos de carpetas. Esta es una propuesta de organización. Solo describe las fases de APE 01; APE 02–04 quedan reservadas, sin inventar sus fases. Las plantillas son propias y deberán ajustarse a las oficiales del EVA cuando estén disponibles.
+- [Guía sencilla](guias/ape-01/fase-04-owasp-y-priorizacion/GUIA-FACIL-PARA-PROBAR.md).
+- [Demostraciones en Swagger](PRUEBAS-EN-SWAGGER.md).
+- [Evidencias técnicas y procedimiento](guias/ape-01/fase-04-owasp-y-priorizacion/evidencias/revision-server5k/README.md).
 
-## Cómo trabajar
+## Continuidad del curso
 
-1. Completar responsables y alcance; registrar versión y ejecución actual del entorno.
-2. Documentar cada fase y guardar las evidencias en su carpeta `evidencias/`.
-3. Relacionar activos `ACT-###`, elementos expuestos `SUP-###`, errores `ERR-###`, hallazgos `HAL-###` y evidencias `EVI-Fn-###`.
-4. Adjuntar solo evidencias revisadas: ocultar contraseñas, tokens, cookies, datos personales y claves.
-5. Actualizar el estado de los entregables y el informe consolidado antes de entregar.
+[APE 02](guias/ape-02/README.md), [APE 03](guias/ape-03/README.md) y [APE 04](guias/ape-04/README.md) mantienen espacios reservados hasta recibir sus guías. Los formatos de trabajo del portafolio se adaptan a las plantillas del EVA cuando se proporcionen.
 
-El código de la aplicación se mantiene en su repositorio original. Este repositorio almacena el portafolio de auditoría; las correcciones pueden documentarse con enlaces a commits o parches revisados.
+Las pruebas se limitan al entorno propio o controlado. Las capturas con claves/tokens o depuración sensible se retiraron de la copia pública del reporte; el original no se publica. El código funcional de la aplicación no se modifica desde este portafolio.
