@@ -37,7 +37,7 @@ El documento se integró el **23/10/2026**. “Documentado” no equivale a “c
 ./probar-owasp.sh A01
 ```
 
-Requiere el repositorio Server5K y sus dependencias en `../Server5K/.venv`; se puede indicar otra ruta con `SERVER5K_DIR`. Las pruebas crean cuentas, equipos y una base SQLite temporal, sin utilizar la base real. A03 no vuelve a consultar avisos CVE; A08 realiza revisión de configuración.
+Requiere las dependencias de `Server5K/.venv`; se puede indicar otra ruta con `SERVER5K_DIR`. Las pruebas crean cuentas, equipos y una base SQLite temporal, sin utilizar la base real. A03 no vuelve a consultar avisos CVE; A08 realiza revisión de configuración.
 
 - [Guía sencilla](guias/ape-01/fase-04-owasp-y-priorizacion/GUIA-FACIL-PARA-PROBAR.md).
 - [Demostraciones en Swagger](PRUEBAS-EN-SWAGGER.md).
