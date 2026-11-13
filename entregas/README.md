@@ -34,3 +34,7 @@ Las referencias a página en el repositorio usan el orden físico 1–16. Los pi
 - Dos declaraciones de refresh para la misma URL no son dos rutas efectivas independientes; prevalece la resolución del router.
 - En A08 no se confirmó manipulación de software; latest se conserva como observación de construcción relacionada con A03.
 - La duración de tokens no prueba por sí sola una vulnerabilidad. Las correcciones, revisión entre pares y cobertura de todas las rutas no se marcan como realizadas sin evidencia.
+
+## APE 02 · Fase 2 · Sesión 1
+
+[Informe de análisis JWT con redacción simplificada](APE-02-fase-02-sesion-01-jwt.pdf), publicado el 13/11/2026. Contiene resultados del laboratorio local del 12/11/2026 y una captura de jwt.io con datos ficticios y sin firma. [Evidencias y alcance](../guias/ape-02/fase-02-control-acceso/sesion-01-jwt/README.md).

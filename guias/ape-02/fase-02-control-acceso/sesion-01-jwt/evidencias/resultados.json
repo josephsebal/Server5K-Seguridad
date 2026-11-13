@@ -1,0 +1,141 @@
+{
+  "captured_at": "2026-11-12T10:24:35.334227-05:00",
+  "repo_commit": "826aec5c04dfc5d3f8be77e9abde2d13f69a51e8",
+  "environment": "Django APIClient; SQLite en memoria; clave y contraseña aleatorias efímeras; sin conexión a producción",
+  "versions": {
+    "django": "5.2.8",
+    "pyjwt": "2.10.1",
+    "simplejwt": "5.5.1"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/api/login/",
+    "username": "juez_laboratorio_ape02",
+    "password": "[OCULTA]"
+  },
+  "response": {
+    "http_status": 200,
+    "access": "[TOKEN OMITIDO]",
+    "refresh": "[TOKEN OMITIDO]"
+  },
+  "access_header": {
+    "alg": "HS256",
+    "typ": "JWT"
+  },
+  "access_claims": {
+    "token_type": "access",
+    "exp": 1794500675,
+    "iat": 1794497075,
+    "jti": "4e0473736757459e978e761c1da7b5ee",
+    "juez_id": 1,
+    "username": "juez_laboratorio_ape02"
+  },
+  "refresh_header": {
+    "alg": "HS256",
+    "typ": "JWT"
+  },
+  "refresh_claims": {
+    "token_type": "refresh",
+    "exp": 1795101875,
+    "iat": 1794497075,
+    "jti": "1199e6ed7ece44bf8ad70662601e0d8e",
+    "juez_id": 1,
+    "username": "juez_laboratorio_ape02"
+  },
+  "access_time": {
+    "iat": {
+      "unix": 1794497075,
+      "utc": "2026-11-12T15:24:35+00:00",
+      "ecuador": "2026-11-12T10:24:35-05:00"
+    },
+    "exp": {
+      "unix": 1794500675,
+      "utc": "2026-11-12T16:24:35+00:00",
+      "ecuador": "2026-11-12T11:24:35-05:00"
+    }
+  },
+  "refresh_time": {
+    "iat": {
+      "unix": 1794497075,
+      "utc": "2026-11-12T15:24:35+00:00",
+      "ecuador": "2026-11-12T10:24:35-05:00"
+    },
+    "exp": {
+      "unix": 1795101875,
+      "utc": "2026-11-19T15:24:35+00:00",
+      "ecuador": "2026-11-19T10:24:35-05:00"
+    }
+  },
+  "access_lifetime_seconds": 3600,
+  "refresh_lifetime_seconds": 604800,
+  "signature_verified": true,
+  "tests": {
+    "original": {
+      "http_status": 200,
+      "body": {
+        "id": 1,
+        "username": "juez_laboratorio_ape02",
+        "first_name": "Cuenta",
+        "last_name": "Laboratorio",
+        "full_name": "Cuenta Laboratorio",
+        "email": "laboratorio@example.invalid"
+      }
+    },
+    "alg_none": {
+      "http_status": 401,
+      "body": {
+        "detail": "El token dado no es valido para ningun tipo de token",
+        "code": "token_not_valid",
+        "messages": [
+          {
+            "token_class": "AccessToken",
+            "token_type": "access",
+            "message": "Token is invalid"
+          }
+        ]
+      }
+    },
+    "payload_alterado": {
+      "http_status": 401,
+      "body": {
+        "detail": "El token dado no es valido para ningun tipo de token",
+        "code": "token_not_valid",
+        "messages": [
+          {
+            "token_class": "AccessToken",
+            "token_type": "access",
+            "message": "Token is invalid"
+          }
+        ]
+      }
+    },
+    "expirado": {
+      "http_status": 401,
+      "body": {
+        "detail": "El token dado no es valido para ningun tipo de token",
+        "code": "token_not_valid",
+        "messages": [
+          {
+            "token_class": "AccessToken",
+            "token_type": "access",
+            "message": "Token is expired"
+          }
+        ]
+      }
+    },
+    "sin_exp": {
+      "http_status": 401,
+      "body": {
+        "detail": "El token dado no es valido para ningun tipo de token",
+        "code": "token_not_valid",
+        "messages": [
+          {
+            "token_class": "AccessToken",
+            "token_type": "access",
+            "message": "El token no tiene el privilegio 'exp'"
+          }
+        ]
+      }
+    }
+  }
+}

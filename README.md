@@ -8,7 +8,11 @@
 
 Aplicación auditada: [DarwinG23/Server5K](https://github.com/DarwinG23/Server5K). Este repositorio reúne el reporte, avances y evidencias de seguridad.
 
-## Avance por fase
+## Último avance · APE 02
+
+**Publicado el 13/11/2026:** [Fase 2 · Sesión 1: análisis de JWT](guias/ape-02/fase-02-control-acceso/sesion-01-jwt/README.md), con informe de redacción simplificada, PDF, captura, resultados y script reproducible. El laboratorio se realizó el 12/11/2026. Las pruebas IDOR de la sesión 2 no se incluyen en este avance.
+
+## Avance por fase · APE 01
 
 | Fase | Qué se incorporó del documento | Acceso |
 | --- | --- | --- |
@@ -45,6 +49,6 @@ Requiere las dependencias de `Server5K/.venv`; se puede indicar otra ruta con `S
 
 ## Continuidad del curso
 
-[APE 02](guias/ape-02/README.md), [APE 03](guias/ape-03/README.md) y [APE 04](guias/ape-04/README.md) mantienen espacios reservados hasta recibir sus guías. Los formatos de trabajo del portafolio se adaptan a las plantillas del EVA cuando se proporcionen.
+[APE 02](guias/ape-02/README.md) contiene el avance de análisis JWT. [APE 03](guias/ape-03/README.md) y [APE 04](guias/ape-04/README.md) mantienen espacios reservados hasta recibir sus guías. Los formatos de trabajo del portafolio se adaptan a las plantillas del EVA cuando se proporcionen.
 
 Las pruebas se limitan al entorno propio o controlado. Las capturas con claves/tokens o depuración sensible se retiraron de la copia pública del reporte; el original no se publica. El código funcional de la aplicación no se modifica desde este portafolio.
