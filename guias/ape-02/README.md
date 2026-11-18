@@ -1,5 +1,7 @@
 # Guía APE 02 · Auditoría técnica y endurecimiento
 
+**Entrega PDF actualizada:** [Reporte APE 02 · Fase 2, sesiones 1 y 2](../../entregas/APE-02-fase-02-control-acceso.pdf).
+
 Actualización del portafolio: **18/11/2026**.
 
 | Fase y sesión | Fecha del laboratorio | Entregable |

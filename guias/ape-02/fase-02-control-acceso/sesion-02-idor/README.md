@@ -1,5 +1,7 @@
 # APE 02 · Fase 2 · Sesión 2: pruebas IDOR y correcciones
 
+**Entrega PDF actualizada:** [Reporte APE 02 · Fase 2, sesiones 1 y 2](../../../../entregas/APE-02-fase-02-control-acceso.pdf).
+
 Sesión del **13/11/2026**. Publicación: **18/11/2026**.
 
 Completamos el reporte de control de acceso con tres pruebas IDOR, la comprobación de roles y la validación de tokens. Utilizamos cuentas ficticias y una base SQLite aislada. Los resultados describen el entorno local; no verifican el servidor de producción.

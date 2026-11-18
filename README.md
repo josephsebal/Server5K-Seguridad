@@ -1,5 +1,7 @@
 # Server5K — Portafolio de Software Security
 
+**Entrega PDF actualizada:** [Reporte APE 02 · Fase 2, sesiones 1 y 2](entregas/APE-02-fase-02-control-acceso.pdf).
+
 **APE 01: Análisis y superficie de ataque del proyecto.** Universidad Nacional de Loja · Computación · Ciclo 8A · Unidad 1.
 
 **Integrantes:** Darwin Enrique Granda Orosco · Darwin Andrés Sarango Soto · Joseph Sebastian Balcazar Loaiza.
