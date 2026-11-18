@@ -1,0 +1,48 @@
+{
+  "fecha": "2026-11-13T09:09:41.140271-05:00",
+  "commit": "61a7db438e6ea990f2a42a8528b43ae2a1b99031",
+  "django": "5.2.8",
+  "entorno": "SQLite en memoria; cuentas ficticias; sin acceso a producción",
+  "usuario": "juez-a",
+  "propietario_objetivo": "juez-b",
+  "equipo_objetivo": 2,
+  "pruebas": [
+    {
+      "caso": "Detalle del equipo",
+      "metodo": "GET",
+      "ruta": "/api/equipos/2/",
+      "esperado": 404,
+      "observado": 404,
+      "respuesta": {
+        "detail": "No Equipo matches the given query."
+      },
+      "correcto": true
+    },
+    {
+      "caso": "Estado de registros",
+      "metodo": "GET",
+      "ruta": "/api/equipos/2/registros/estado/",
+      "esperado": 404,
+      "observado": 404,
+      "respuesta": {
+        "error": "Equipo no encontrado"
+      },
+      "correcto": true
+    },
+    {
+      "caso": "Envío de registros ajenos",
+      "metodo": "POST",
+      "ruta": "/api/equipos/2/registros/",
+      "enviados": 15,
+      "esperado": 403,
+      "observado": 403,
+      "respuesta": {
+        "exito": false,
+        "error": "Este equipo no te pertenece"
+      },
+      "antes": 1,
+      "despues": 1,
+      "correcto": true
+    }
+  ]
+}
