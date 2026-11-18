@@ -3,7 +3,7 @@
 Pruebas realizadas el **12/11/2026, 10:24:35 (Ecuador)**. Publicación en el portafolio: **13/11/2026**.
 
 - [Informe con redacción simplificada](informe.md).
-- [Informe PDF](../../../../entregas/APE-02-fase-02-sesion-01-jwt.pdf).
+- [Informe PDF actualizado: sesiones 1 y 2](../../../../entregas/APE-02-fase-02-control-acceso.pdf).
 - [Documento editable](https://docs.google.com/document/d/18ekMniZCxJlJTltbczjbvmL5arOzhYUpAeWVBdrgBwg/edit).
 - [Resultados originales del laboratorio](evidencias/resultados.json).
 - [Captura de jwt.io](evidencias/E02-jwtio.png).

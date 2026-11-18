@@ -35,13 +35,9 @@ Las referencias a página en el repositorio usan el orden físico 1–16. Los pi
 - En A08 no se confirmó manipulación de software; latest se conserva como observación de construcción relacionada con A03.
 - La duración de tokens no prueba por sí sola una vulnerabilidad. Las correcciones, revisión entre pares y cobertura de todas las rutas no se marcan como realizadas sin evidencia.
 
-## APE 02 · Fase 2 · Sesión 1
-
-[Informe de análisis JWT con redacción simplificada](APE-02-fase-02-sesion-01-jwt.pdf), publicado el 13/11/2026. Contiene resultados del laboratorio local del 12/11/2026 y una captura de jwt.io con datos ficticios y sin firma. [Evidencias y alcance](../guias/ape-02/fase-02-control-acceso/sesion-01-jwt/README.md).
-
 ## APE 02 · Fase 2 · Entrega actualizada
 
-[Reporte de control de acceso: sesiones 1 y 2](APE-02-fase-02-control-acceso.pdf), publicado el **18/11/2026**. Es la entrega actual de la fase 2; el PDF de la sesión 1 se conserva como antecedente.
+[Reporte de control de acceso: sesiones 1 y 2](APE-02-fase-02-control-acceso.pdf), publicado el **18/11/2026**. Es la entrega actual de la fase 2 y sustituye al PDF anterior que solo incluía el análisis de tokens.
 
 Fuente: `APE_02_ Fase 02_ Control de acceso y autenticación_Seccion2.docx.pdf`, aportado por el usuario. La copia mantiene las 18 páginas originales y añade una página de notas de publicación. Se eliminaron las cabeceras con tokens de las capturas de Swagger de las páginas físicas 12–14.
 
