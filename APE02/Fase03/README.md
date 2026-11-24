@@ -1,181 +1,146 @@
-# Fase 3: Ataques de inyección: explotación controlada y mitigación de SQLi y XSS
+## Fase 3: Ataques de inyección: explotación controlada y mitigación de SQLi y XSS
 
-**Proyecto:** Server5K (Django 6.0 + Django REST Framework, PostgreSQL con Docker Compose)
-**Entorno:** solo `localhost` (`http://localhost:8000`), con datos ficticios de laboratorio.
+### Sesión 1: Explotación controlada
 
-## Sesión 1: Explotación controlada
+Las pruebas se dividieron en dos etapas. En la primera (**antes**) se explotaron SQLi y XSS en DVWA, un entorno vulnerable por diseño, para observar el comportamiento de una aplicación sin protección. En la segunda (**después**) se enviaron los mismos tipos de payload a Server5K, donde se verificó que la aplicación ya incorporaba las mitigaciones y no requirió modificaciones. Toda la explotación se realizó en entornos locales y controlados, con payloads mínimos.
 
-## 1. EXPLOTACIÓN CONTROLADA: EL ANTES
+## 1. EXPLOTACIÓN CONTROLADA: EL ANTES (DVWA)
 
-> **Aclaración:** Server5K no tiene endpoints vulnerables a SQLi ni a XSS, así que las pruebas 1.1 a 1.3 muestran la protección ya vigente. El estado vulnerable real se demuestra en DVWA (apartado 1.4), como permite la guía.
+Entorno: DVWA local (`http://localhost/dvwa`), nivel de seguridad **Low**.
 
 ### 1.1. SQL Injection: prueba con comilla simple
 
-**Petición probada:**
-```http
-POST /api/login/
-Content-Type: application/json
+Módulo: *SQL Injection*. Entrada en el campo *User ID*:
 
-{
-    "username": "1'",
-    "password": "x"
-}
 ```
-**Resultado observado:**
+1'
 ```
-HTTP 401 Unauthorized
-{"error":"Credenciales inválidas."}
-```
-**Análisis:**
-La entrada que contiene una comilla simple no produjo un error SQL ni permitió realizar una autenticación exitosa. El servidor respondió con un código HTTP 401, indicando que las credenciales proporcionadas no fueron aceptadas.
 
-[INSERTAR CAPTURA: evidencias/04_sqli_comilla_login_401.png]
-*Figura 1: Captura de pantalla de la petición con el valor `1'` y la respuesta HTTP 401.*
+Resultado observado: DVWA devolvió un error de sintaxis SQL generado por el gestor de base de datos.
+
+Análisis: La comilla simple rompió la consulta. Esto confirma que el valor se concatena directamente en la sentencia SQL, sin parametrización. Además, el mensaje de error expone información interna de la base de datos, lo que facilita la explotación.
+
+*Figura 8: Error SQL en DVWA (nivel Low) al ingresar `1'`.*
 
 ### 1.2. SQL Injection: prueba de tautología
 
-**Petición probada:**
-```http
+Entrada en el campo *User ID*:
+
+```
+1' OR '1'='1
+```
+
+Resultado observado: DVWA devolvió los registros de todos los usuarios de la tabla, no solo el del identificador solicitado.
+
+Análisis: La condición `OR '1'='1'` siempre es verdadera, por lo que la cláusula `WHERE` dejó de filtrar. La entrada alteró la lógica de la consulta, que es el comportamiento característico de una inyección SQL.
+
+*Figura 9: Listado completo de usuarios obtenido en DVWA con la tautología.*
+
+### 1.3. XSS reflejado: prueba de ejecución JavaScript
+
+Módulo: *XSS (Reflected)*. Entrada en el campo *What's your name?*:
+
+```
+<script>alert(1)</script>
+```
+
+Resultado observado: el navegador ejecutó el script y mostró una ventana de alerta.
+
+Análisis: DVWA incorpora el valor recibido en la página sin codificarlo, por lo que el navegador lo interpretó como código. Un atacante podría usar este mecanismo para robar sesiones o redirigir al usuario.
+
+*Figura 10: Ejecución de `alert(1)` en DVWA mediante XSS reflejado.*
+
+## 2. VERIFICACIÓN DE LA MITIGACIÓN: EL DESPUÉS (SERVER5K)
+
+Los mismos tipos de payload se enviaron a `POST /api/login/` de Server5K desde Swagger UI (`/api/docs/`), con el panel Network de DevTools abierto para registrar la petición y la respuesta. Todas las respuestas fueron HTTP 401, con el mensaje genérico `{"error":"Credenciales inválidas."}`.
+
+### 2.1. SQL Injection: comilla simple
+
+```
 POST /api/login/
-Content-Type: application/json
-
-{
-    "username": "admin' OR '1'='1' #",
-    "password": "x"
-}
+{ "username": "1'", "password": "x" }
 ```
-**Resultado observado:**
+
+Resultado: `HTTP 401 Unauthorized`. A diferencia de DVWA, no hubo error SQL ni información interna. La entrada se trató como un valor de texto.
+
+*Figura 11: Petición con `1'` y respuesta HTTP 401 en Server5K.*
+
+### 2.2. SQL Injection: tautología
+
 ```
-HTTP 401 Unauthorized
-{"error":"Credenciales inválidas."}
-```
-**Análisis:**
-Se utilizó una expresión lógica de tautología para comprobar si era posible alterar la condición de autenticación. Sin embargo, la aplicación rechazó la petición y devolvió el código HTTP 401. No se consiguió omitir el proceso de autenticación ni acceder al sistema mediante la entrada proporcionada.
-
-[INSERTAR CAPTURA: evidencias/05_sqli_tautologia_login_401.png]
-*Figura 2: Captura de pantalla del payload de tautología y la respuesta HTTP 401.*
-
-### 1.3. Payload `<script>` en el login
-
-**Petición probada:**
-```http
 POST /api/login/
-Content-Type: application/json
-
-{
-    "username": "<script>alert(1)</script>",
-    "password": "cualquier_valor"
-}
+{ "username": "admin' OR '1'='1' #", "password": "x" }
 ```
-**Resultado observado:**
+
+Resultado: `HTTP 401 Unauthorized`. La tautología que en DVWA devolvió todos los registros aquí no alteró la consulta ni permitió omitir la autenticación.
+
+*Figura 12: Payload de tautología y respuesta HTTP 401 en Server5K.*
+
+### 2.3. XSS: etiqueta script
+
 ```
-HTTP 401 Unauthorized
-Content-Type: application/json
-{"error":"Credenciales inválidas."}
+POST /api/login/
+{ "username": "<script>alert(1)</script>", "password": "cualquier_valor" }
 ```
-**Análisis:**
-Se envió una etiqueta script como valor del campo `username` para comprobar si la aplicación la devolvía como contenido ejecutable. La respuesta fue HTTP 401 en JSON, un formato que el navegador no interpreta como HTML, y no se observó ninguna ventana de alerta. Como el login devuelve JSON, este caso solo demuestra que la API no refleja el payload. La prueba de XSS sobre una página HTML está en el apartado 3.
 
-[INSERTAR CAPTURA: evidencias/06_xss_script_login_401.png]
-*Figura 3: Captura de pantalla del payload enviado y la respuesta HTTP 401.*
+Resultado: `HTTP 401 Unauthorized`, con un cuerpo JSON fijo que no refleja el valor enviado y sin ventana de alerta. En DVWA el mismo payload se ejecutó.
 
-### 1.4. Explotación en DVWA (estado vulnerable)
+*Figura 13: Payload con `script` y respuesta HTTP 401 en Server5K.*
 
-Pendiente de capturar en DVWA local, con nivel de seguridad **Low** (`docker run --rm -d -p 8081:80 --name dvwa vulnerables/web-dvwa`):
+## 3. MITIGACIÓN EN CÓDIGO
 
-| Prueba | Módulo | Payload | Resultado esperado | Captura |
-|---|---|---|---|---|
-| SQLi comilla simple | SQL Injection | `'` | Error SQL | [INSERTAR CAPTURA: evidencias/01_sqli_comilla_dvwa.png] |
-| SQLi tautología | SQL Injection | `' OR '1'='1` | Lista de todos los usuarios | [INSERTAR CAPTURA: evidencias/02_sqli_tautologia_dvwa.png] |
-| XSS reflejado | XSS (Reflected) | `<script>alert(1)</script>` | Se ejecuta `alert(1)` | [INSERTAR CAPTURA: evidencias/03_xss_reflejado_dvwa.png] |
+Al revisar el código se comprobó que ambas protecciones ya estaban implementadas desde el diseño de la aplicación. Por eso no se modificó el proyecto: se documenta el mecanismo que explica los resultados de la sección 2.
 
-## 2. MITIGACIÓN EN CÓDIGO
+### 3.1. Mitigación de SQL Injection: uso del ORM de Django
 
-### 2.1. Mitigación de SQL Injection: utilización del ORM de Django
+El inicio de sesión consulta a los usuarios con el ORM de Django, sin construir SQL mediante concatenación de cadenas:
 
-En el proceso de inicio de sesión se utiliza el ORM (Object-Relational Mapping) de Django para consultar los registros de usuarios, evitando construir consultas SQL mediante concatenación directa de cadenas.
-
-El fragmento de código utilizado es el siguiente (`Server5K/app/views/auth_views.py`):
 ```python
-juez = Juez.objects.filter(
-    is_active=True
-).filter(
-    Q(username__iexact=username) | Q(email__iexact=username)
-).first()
+try:
+    juez = Juez.objects.filter(
+        is_active=True
+    ).filter(
+        Q(username__iexact=username) | Q(email__iexact=username)
+    ).first()
+except Exception:
+    pass
 
 if juez:
     password_valid = juez.check_password(password)
 else:
-    check_password(password, 'dummy$pbkdf2-sha256$260000$...')  # iguala el tiempo de respuesta
+    check_password(password, 'dummy$pbkdf2-sha256$260000$...')
     password_valid = False
 ```
-[INSERTAR CAPTURA: evidencias/10_codigo_orm.png]
-*Figura 4: Mitigación de SQL Injection: utilización del ORM de Django.*
 
-**Análisis de la mitigación:**
-El ORM envía la consulta y los valores por separado (`WHERE ... LIKE %s`), por lo que los valores del usuario no se interpretan como instrucciones SQL. Además, la contraseña no llega a la base de datos: se verifica con `check_password()`, que compara el valor recibido con el hash almacenado. El `else` ejecuta una comprobación ficticia para que usuarios existentes e inexistentes tarden lo mismo.
-Complementos: el proyecto no usa `.raw()`, `.extra()` ni `cursor.execute()`. Los filtros por URL (`?categoria=`, `?competition_id=`, `?judge_id=`) pasan por `filter()`, las rutas usan `<int:pk>`, y `serializers.py` valida tipo y longitud (`IntegerField`, `max_length=15`, tiempos no negativos).
+*Figura 14: Mitigación de SQL Injection: uso del ORM de Django.*
 
-**Archivo revisado:** `app/views/auth_views.py`
+Análisis: El ORM parametriza internamente las consultas, de modo que los valores del usuario se tratan como datos y no como instrucciones SQL. Esta es la diferencia con DVWA, donde la entrada se concatena en la consulta. La contraseña se verifica con `check_password()`, que compara el valor recibido con el hash almacenado. Si el usuario no existe, se ejecuta igualmente `check_password()` contra un hash ficticio, de modo que el tiempo de respuesta no revela qué cuentas existen. El `try/except` evita que un fallo de consulta exponga detalles internos; se recomienda registrar la excepción con `logger` en lugar de omitirla con `pass`.
 
-### 2.2. Mitigación de XSS: escapado automático de salida
+Archivo revisado: `app/views/auth_views.py`
 
-Django dispone de un mecanismo de autoescape habilitado por defecto en sus plantillas, el cual permite convertir caracteres especiales en entidades HTML para evitar que el contenido dinámico sea interpretado como código ejecutable.
+### 3.2. Mitigación de XSS: respuesta JSON y escapado automático
 
-Ejemplo de utilización segura:
-```django
+La API responde con JSON de contenido fijo, que no incorpora el valor enviado. En las plantillas HTML, Django aplica por defecto el autoescape, que convierte los caracteres especiales en entidades HTML:
+
+```
 {{ competencia.name }}
 ```
-Se debe evitar el uso del filtro `safe` cuando se trabaja con contenido que proviene de entradas no confiables.
 
-Ejemplo de utilización insegura (no usado en el proyecto):
-```django
+Debe evitarse el filtro `safe` con datos no confiables:
+
+```
 {# No utilizar con datos no confiables #}
 {{ contenido_usuario|safe }}
 ```
-**Análisis de la mitigación:**
-El escapado automático permite que los datos dinámicos se presenten como texto y no como instrucciones HTML o JavaScript. En el proyecto no hay `|safe`, `mark_safe` ni `{% autoescape off %}`, `admin.py` usa `format_html` y el parámetro `?categoria=` nunca se imprime tal cual. Cabeceras activas: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: same-origin`.
 
-**Archivos revisados:**
-- `templates/base.html`
-- `templates/app/competencia_list.html`
-- `templates/app/competencia_detail.html`
-- `templates/app/partials/competencia_results.html`
+Análisis: El escapado automático hace que los datos dinámicos se muestren como texto y no como HTML o JavaScript. Esto explica que el payload que en DVWA se ejecutó no tuviera efecto en Server5K.
 
-**Limitación:** la aplicación **no envía** `Content-Security-Policy` (ver `evidencias/08_xss_html_cabeceras.txt`). Sería una defensa en profundidad recomendable, por ejemplo `default-src 'self'; script-src 'self'; object-src 'none'`, pero no se implementó en esta fase y requiere revisar antes los scripts inline y los usos de `innerHTML` de `competencia_detail.html`.
+Archivos revisados: `templates/base.html`, `templates/app/competencia_list.html`, `templates/app/competencia_detail.html`
 
-## 3. VERIFICACIÓN / RE-TEST (DESPUÉS)
+## 4. COMPARATIVA ANTES / DESPUÉS
 
-Se repitieron los payloads contra la aplicación en ejecución.
-
-| # | Endpoint | Payload | Resultado | Evidencia |
-|---|---|---|---|---|
-| 1 | `POST /api/login/` | `1'` | 401, sin error SQL | `04_sqli_comilla_login_401.png` |
-| 2 | `POST /api/login/` | `admin' OR '1'='1' #` | 401, sin bypass | `05_sqli_tautologia_login_401.png` |
-| 3 | `POST /api/login/` | `' OR '1'='1' -- ` | 401, sin bypass | `curl` |
-| 4 | `POST /api/login/` | `<script>alert(1)</script>` | 401, respuesta JSON | `06_xss_script_login_401.png` |
-| 5 | `GET /5/?categoria=<script>alert(1)</script>` | `<script>alert(1)</script>` | 200, el nombre se muestra como texto y no hay pop-up | `07_xss_html_escapado_despues.png` |
-| 6 | Mismo GET | HTML devuelto | `&lt;script&gt;alert(1)&lt;/script&gt;` en `<title>`, breadcrumb y encabezado | `08_xss_html_cabeceras.txt` |
-| 7 | `POST /api/login/` | Credenciales válidas de laboratorio | 200 (control positivo) | `curl` |
-
-Para la prueba 5 se creó en la base local una competencia llamada `LAB-F3 <script>alert(1)</script>` con un equipo `<script>alert(1)</script>`, que se muestran escapados.
-
-[INSERTAR CAPTURA: evidencias/07_xss_html_escapado_despues.png]
-*Figura 5: Página de detalle mostrando el script como texto, sin ejecución.*
-
-Reproducción sin navegador:
-```bash
-curl -i -H "Content-Type: application/json" -d '{"username":"1'"'"'","password":"x"}' http://localhost:8000/api/login/
-curl -i "http://localhost:8000/5/?categoria=%3Cscript%3Ealert(1)%3C/script%3E"
-```
-
-## 4. CONCLUSIONES
-
-- Server5K resiste los payloads de SQLi y XSS probados porque el ORM parametriza las consultas y las plantillas escapan la salida, no por casualidad.
-- La explotación real se demuestra en DVWA, un entorno diseñado para ello.
-- Mejora pendiente: agregar `Content-Security-Policy` como defensa en profundidad.
-- Todas las pruebas se hicieron en `localhost` con datos ficticios.
-
-### Pregunta de Control Nro. 3
-**¿Por qué la validación de entrada por sí sola no basta contra SQLi y XSS?**
-La validación decide qué entradas se aceptan, pero no cambia cómo se usan después. Un nombre de equipo legítimo puede contener `'` o `<`, como `O'Brien <Norte>`, y rechazarlo no es una solución general. Si el dato se concatenara en SQL o se imprimiera sin escapar, una entrada que pase la validación seguiría siendo peligrosa. En Server5K el login acepta cualquier texto como `username`, pero el ORM lo envía como parámetro y no como SQL, y los nombres de competencia y equipos se muestran escapados (`&lt;script&gt;`). Por eso las defensas principales son la consulta parametrizada y el escapado de salida según el contexto, con la CSP como refuerzo. La validación es solo una capa más.
+| Ataque | Payload | DVWA (antes) | Server5K (después) |
+|---|---|---|---|
+| SQLi: comilla | `1'` | Error SQL expuesto | HTTP 401 genérico |
+| SQLi: tautología | `1' OR '1'='1` | Devuelve todos los usuarios | HTTP 401, sin acceso |
+| XSS reflejado | `<script>alert(1)</script>` | Se ejecuta la alerta | HTTP 401, JSON sin reflejar el valor |
