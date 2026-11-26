@@ -10,9 +10,11 @@
 
 Aplicación auditada: [DarwinG23/Server5K](https://github.com/DarwinG23/Server5K). Este repositorio reúne el reporte, avances y evidencias de seguridad.
 
-## Último avance · APE 02
+## Avance · APE 02
 
 **Actualizado el 18/11/2026:** [Fase 2 · Sesión 2: pruebas IDOR y correcciones](guias/ape-02/fase-02-control-acceso/sesion-02-idor/README.md), con las tres pruebas IDOR, imágenes, resultados JSON, control de roles y reproducción de las siete pruebas de seguridad. Se conserva el [análisis JWT de la sesión 1](guias/ape-02/fase-02-control-acceso/sesion-01-jwt/README.md).
+
+**Índice actualizado el 26/11/2026:** [APE 02 por fases](guias/ape-02/README.md). La [Fase 1](guias/ape-02/fase-01-criptografia/README.md) resume la revisión criptográfica; la [Fase 3](APE02/Fase03/README.md) documenta pruebas SQLi y XSS; la [Fase 4](guias/ape-02/fase-04-sast-contenedores/README.md) registra el análisis Bandit y una propuesta de Dockerfile con comparación de Trivy config. La construcción y el escaneo de la imagen aún requieren evidencia.
 
 ## Avance por fase · APE 01
 
@@ -51,6 +53,6 @@ Requiere las dependencias de `Server5K/.venv`; se puede indicar otra ruta con `S
 
 ## Continuidad del curso
 
-[APE 02](guias/ape-02/README.md) contiene el análisis JWT y las pruebas IDOR de la fase 2. [APE 03](guias/ape-03/README.md) y [APE 04](guias/ape-04/README.md) mantienen espacios reservados hasta recibir sus guías. Los formatos de trabajo del portafolio se adaptan a las plantillas del EVA cuando se proporcionen.
+[APE 02](guias/ape-02/README.md) reúne el índice de sus cuatro fases. [APE 03](guias/ape-03/README.md) y [APE 04](guias/ape-04/README.md) mantienen espacios reservados hasta recibir sus guías. Los formatos de trabajo del portafolio se adaptan a las plantillas del EVA cuando se proporcionen.
 
 Las pruebas se limitan al entorno propio o controlado. Las capturas con claves/tokens o depuración sensible se retiraron de la copia pública del reporte; el original no se publica. El código funcional de la aplicación no se modifica desde este portafolio.
