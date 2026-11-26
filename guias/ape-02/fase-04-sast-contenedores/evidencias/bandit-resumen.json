@@ -1,0 +1,54 @@
+{
+  "herramienta": "Bandit 1.9.4",
+  "alcance": "Server5K/app y Server5K/server",
+  "resumen": {
+    "lineas": 4151,
+    "alertas": 7,
+    "alta": 1,
+    "baja": 6
+  },
+  "alertas": [
+    {
+      "regla": "B311",
+      "severidad": "LOW",
+      "archivo": "app/management/commands/populate_data.py",
+      "linea": 165
+    },
+    {
+      "regla": "B105",
+      "severidad": "LOW",
+      "archivo": "app/tests/tests.py",
+      "linea": 16
+    },
+    {
+      "regla": "B324",
+      "severidad": "HIGH",
+      "archivo": "app/utils/idempotency.py",
+      "linea": 114
+    },
+    {
+      "regla": "B110",
+      "severidad": "LOW",
+      "archivo": "app/views/auth_views.py",
+      "linea": 75
+    },
+    {
+      "regla": "B110",
+      "severidad": "LOW",
+      "archivo": "app/websocket/consumers.py",
+      "linea": 137
+    },
+    {
+      "regla": "B110",
+      "severidad": "LOW",
+      "archivo": "app/websocket/consumers.py",
+      "linea": 446
+    },
+    {
+      "regla": "B105",
+      "severidad": "LOW",
+      "archivo": "server/settings.py",
+      "linea": 219
+    }
+  ]
+}
